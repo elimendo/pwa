@@ -3,9 +3,6 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
-
 module.exports = () => {
   return {
     mode: 'development',
@@ -18,50 +15,56 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+      // Webpack plugin that generates our html file and injects our bundles. 
       new HtmlWebpackPlugin({
-        template:"./index.html",
-        title: "J.A.T.E"
+        template: './index.html',
+        title: 'J.A.T.E.'
       }),
+     
+      // Injects our custom service worker
       new InjectManifest({
-        swSrc: "./src-sw.js",
-        swDest: 'src-sw.js'
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
       }),
-      new WebpackPwaManifest ({
+
+      // Creates a manifest.json file.
+      new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: "Text Editor",
-        short_name: "J.A.T.E",
-        description: "Uses JS syntax highlighting to take notes",
-        background_color: "purple",
-        theme_color: "black",
-        start_url: "/",
-        publicPath: "/",
+        name: 'Text Editor',
+        short_name: 'J.A.T.E',
+        description: 'Takes notes with Javascript highlighting!',
+        background_color: 'green',
+        theme_color: 'blue',
+        start_url: './',
+        publicPath: './',
         icons: [
           {
-            src: path.resolve("src/images/logo.png"),
+            src: path.resolve('./src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
-          }
-        ]
-      })
+            destination: path.join("assets", "icons"),
+          },
+        ],
+      }),      
     ],
 
     module: {
       rules: [
         {
-          tests: /\.css/i,
-          use: ['style-loader', 'css-loader']
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
         },
         {
-          test: /\.m?.js$/,
+          test: /\.m?js$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
-              presents: ['@babel/present-env'],
-              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime']
-            }
-          }
-        }
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+            },
+          },
+        },        
       ],
     },
   };
