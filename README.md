@@ -10,7 +10,7 @@ text-editor/
 ├── package.json        # npm package configuration
 └── README.md           # Readme file
 ## Installation and Usage
-
+![Capture](https://github.com/elimendo/pwa/assets/148833152/a48b586e-3470-4db4-9d4a-cf6822a02111)
 # Starting the Application:
 
 Navigate to the root directory of the project.
