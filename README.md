@@ -51,7 +51,9 @@ Verify that the application is running smoothly on Render's servers.
 
 # Deployment 
 ![Capture](https://github.com/elimendo/pwa/assets/148833152/a48b586e-3470-4db4-9d4a-cf6822a02111)
-https://elimendo.github.io/pwa/
+
+## Render
+[https://github.com/elimendo/pwa](https://pwa-lzjx.onrender.com/)https://pwa-lzjx.onrender.com/
 
 
 
